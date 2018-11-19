@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>5 Burgers</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" href="css/deli-very.css">
+		<script type="text/javascript" src="js/menu.js" defer></script>
+		<script src="js/js_script.js" defer></script>
+		<script src="https://vuejs.org/js/vue.js" defer></script>
+		<script src="/socket.io/socket.io.js" defer></script>
+		<script src="js/vue_script.js" defer></script>
+
+    </head>
+    <body>
+	<!-- Hi there! -->
+		<main id="main">
+			<header class="demo1">
+				<h1 align=center>Welcome to BurgerHeaven Online</h1><br>
+			</header>
+
+			<section id="one"><!--Section 1-->
+				<h3>Select burger</h3>
+				<p>This is where you execute burger selection</p><br>
+						
+				<div id="wrapper">
+					<p id="box_a" align=center>{{ burger1 }}</p>
+					<p id="box_b" align=center>{{ burger2 }}</p>
+					<p id="box_c" align=center>{{ burger3 }}</p>
+					<p id="box_d" v-html="image1">{{ image1 }}</p>
+					<p id="box_e" v-html="image2">{{ image2 }}</p>
+					<p id="box_f" v-html="image3">{{ image3 }}</p>
+					<div id="box_g">
+						<ul id="description1">										
+							<li id="desc1.1" align=left>{{ desc1_1 }}</li>
+							<li id="desc1.2" align=left>{{ desc1_2 }}</li>
+							<li id="desc1.3" align=left>{{ desc1_3 }}</li>
+							<p>Add to order: <input type="checkbox" name="checkbox"></p>
+						</ul>
+					</div>
+					<div id="box_h">
+						<ul id="description2">										
+							<li id="desc2.1" align=left>{{ desc2_1 }}</li>
+							<li id="desc2.2" align=left>{{ desc2_2 }}</li><br>
+							<p>Add to order: <input type="checkbox" name="checkbox"></p>
+						</ul>
+					</div>
+					<div id="box_i">
+						<ul id="description3">										
+							<li id="desc3.1" align=left>{{ desc3_1 }}</li>
+							<li id="desc3.2" align=left>{{ desc3_2 }}</li>
+							<li id="desc3.3" align=left>{{ desc3_3 }}</li>
+							<p>Add to order: <input type="checkbox" name="checkbox"></p>
+						</ul>
+					</div>
+				</div>
+						  
+			</section>
+
+			<section id="two"><!--Section 2-->
+				<h2>Customer information</h2>
+				<div>This is where you provide necessary information</div>
+				<h3>Delivery information:</h3>
+
+				<form><!--Some information for users to fill in-->
+					<p>
+						<label for="fullname">Full name</label><br>
+						<input type="text" id="fullname" name="fn" required="required" placeholder="First- and Last name">						
+					</p>
+					<p>
+						<label for="email">E-mail</label><br>
+						<input type="text" id="email" name="em" required="required" placeholder="E-mail address">
+					</p>
+				
+				</form>
+
+				<p>
+					<label for="recipient">Payment Options</label><br>
+					<select id="DropDownList" name="ddl">
+						<option selected="selected" value="0">PayPal</option>
+						<option value="1">Swish</option>
+						<option value="2">VISA Credit Card</option>
+					</select>
+				</p>
+
+				<form action="">Gender<br>
+					<input type="radio" name="gender" value="male"> Male<br>
+					<input type="radio" name="gender" value="female"> Female<br>
+					<input type="radio" name="gender" value="non-binary"> Non-binary<br>
+					<input type="radio" name="gender" value="undisclosed"> Undisclosed<br><br>
+				</form>					
+			
+				<!--Map-->
+				<p>Please indicate point of delivery:</p>
+				<div class="view-box">
+				  <div id="dots" v-on:click="displayOrder">
+					  <div 
+						v-for="(order, key) in orders"
+						v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}">
+						{{key}}
+					  </div>
+				  </div>
+				</div>
+			</section><br>
+			
+			<!--Click on the button-->
+			<button id="OrderButton" v-on:click="addOrder">
+				<img src="https://cdn2.iconfinder.com/data/icons/lullacons/arrow-end-up-red.png"> Send Info</button>			
+
+			<div>
+				<h3>Order Information</h3>
+
+				<h4>Customer details</h4>
+				<p id="information">
+					<p id="CustomerName">Name: {{ name }}</p>
+					<p id="CustomerEmail">Email: {{ email }}</p>
+					<p id="CustomerPaymentMethod">Payment Method: {{ PaymentMethod }}</p>
+					<p id="CustomerGender">Gender: {{ gender }}</p>
+				</p>
+
+				<h4>Order summary</h4>
+				<ul id="OrderedSummary">
+					<li>{{OrderedBurgers}}</li>
+				</ul>
+			</div>
+				   
+		</main>
+    </body>
+</html>
